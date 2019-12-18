@@ -1,0 +1,16 @@
+version: "2"
+services:
+  jenkins:
+    image: jenkinsci/blueocean
+    environment:
+      - DOCKER_HOST=tcp://host.docker.internal:2375
+      - TZ=US/Central
+    user: root
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "50000:50000"
+      - "5555:5555"
+    volumes:
+      - ./jenkins_data:/var/jenkins_home
+      - ./home:/home
