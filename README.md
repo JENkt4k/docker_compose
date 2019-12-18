@@ -37,7 +37,7 @@ Step #1 - Adding the plugin and updating the project files (assumes [Jenkins ver
   - Go to ```Manage>Configuration``` and scroll to ```SonarQube Servers``` section
   ![alt text](./docs/images/ManageJenkins.Configuration.SonarQube.JPG)
   - Click "Add SonarQube" button if the screen isn't showing the fields above
-  - using "ipconfig" if your on Windows, or "ifconfig" on Linux, get your computers ("HOST") ip address and add it to the "**ServerURL**" field as shown: *http://host-ip:9000* where "**host-ip**" is your systems ip address
+  - using "ipconfig" on Windows, or "ifconfig" on Linux, get your computers ("HOST") ip address and add it to the "**ServerURL**" field as shown: *http://host-ip:9000* where "**host-ip**" is your systems ip address
 
   - Now click "Advanced" button under "Server Authentication" token 
   ![alt text](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.jpg) You should see "Webhook Secret", we'll need to get the token from SonarQube to add here, open a new browser window to http://localhost:9000 
