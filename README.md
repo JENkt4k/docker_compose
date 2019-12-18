@@ -34,19 +34,42 @@ docker-compose up
 Step #1 - Adding the plugin and updating the project files (assumes [Jenkins ver. 2.190.3](https://jenkins.io/changelog/) or later with Blueocean). Your new Jenkins server should be running at http://localhost:8080 unless you changed the [docker-compose.yml](./jenkins_blueocean/docker-compose.yml)
 
   - Open Jenkins administration 
-  - Go to ```Manage>Configuration``` and scroll to ```SonarQube Servers``` section
-  ![alt text](./docs/images/ManageJenkins.Configuration.SonarQube.JPG)
+  - Go to ```Manage Jenkins > Configuration``` and scroll to ```SonarQube Servers``` section
+  ![Manage>Configuration>SonarQube Servers](./docs/images/ManageJenkins.Configuration.SonarQube.JPG)
   - Click "Add SonarQube" button if the screen isn't showing the fields above
   - using "ipconfig" on Windows, or "ifconfig" on Linux, get your computers ("HOST") ip address and add it to the "**ServerURL**" field as shown: *http://host-ip:9000* where "**host-ip**" is your systems ip address
 
   - Now click "Advanced" button under "Server Authentication" token 
-  ![alt text](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.jpg) You should see "Webhook Secret", we'll need to get the token from SonarQube to add here, open a new browser window to http://localhost:9000 
+  ![Manage>Configuration>SonarQube Servers>Advanced>Server Authentication](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.jpg) You should see "Webhook Secret", we'll need to get the token from SonarQube to add here, open a new browser window to http://localhost:9000 
 
-  Step #2 - Generating the Webhook Key from Sonar. Your new server should be at http://localhost:9000 unless you changed the [docker-compose.yml](./sonarqube_postgre_sql/docker-compose.yml)
+Step #2 - Generating the Webhook Key from Sonar. Your new server should be at http://localhost:9000 unless you changed the [docker-compose.yml](./sonarqube_postgre_sql/docker-compose.yml)
 
   - Click the "Login" button, default user is "admin" and password is "admin" (you'll want to change this eventually)
-  ![alt text](./docs/images/SonarQube.Login.JPG)
+  ![Login](./docs/images/SonarQube.Login.JPG)
 
-  - Once you've logged in, you should see a new "Administration" tab in the menu, click on that and then click "Configuration" to view the "Webhooks" menu item and click it ![alt text](./docs/images/SonarQube.Administration.Webhooks.JPG)
+  - Once you've logged in, you should see a new "Administration" tab in the menu, click on that and then click "Configuration" to view the "Webhooks" menu item and click it ![Administration>Configuration>Webhooks](./docs/images/SonarQube.Administration.Webhooks.JPG)
 
+  - On the "Webhooks" page, click "Create" button 
+  ![Create Button](./docs/images/SonarQube.Administration.Webhooks.ClickCreate.JPG)
 
+  - a "Create Webhook" pop up should appear. Fill "Name" field with "Jenkins", "URL" field with Jenkins web address (http://host-ip:8080/sonarqube-webhook) and leave "Secret" blank for now and finally click "Create"    
+  ![Create Webhooks](./docs/images/SonarQube.Administration.Webhooks.Create.JPG)
+
+  - you should now see a new "Jenkins" webhook on the "Webhooks" page
+  ![New Jenkins Webhooks](./docs/images/SonarQube.Administration.Webhooks.Created.JPG)
+
+Step #3 - Generating SonarQube token and adding it to Jenkins
+  - Click on the "Administator" button in the top right of the page and select "My Account"
+  ![Administator > My Account](./docs/images/SonarQube.Administrator.MyAccount.JPG)
+
+  - Now click the "Security" tab, Type "Jenkins" in the "Enter Token Name" field, "Generate" button will become enabled so just click it
+  ![Generate Tokens](./docs/images/SonarQube.Administrator.Tokens.JPG)
+
+  - a new Token will be generated, make sure to copy it now, it won't be visible again, place it in a secure location, you will need to put this in the "Token" field for Jenkins from the end of Step #1
+  ![Generated Tokens](./docs/images/SonarQube.Administrator.Token.Generated.JPG)
+
+  - Go back to the ```Jenkins > Manage Jenkins> Configuration > SonarQube Servers > Advanced > Server Authentication``` from the last part of Step #1 and click "Add"
+  ![Manage>Configuration>SonarQube Servers>Advanced>Server Authentication](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.jpg)
+
+  - a select "Docker Host Certificate Authentication" from "Kind" and click "Add"  in "Client Key"
+  ![](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.Add.jpg)
