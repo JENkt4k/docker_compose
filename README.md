@@ -71,5 +71,27 @@ Step #3 - Generating SonarQube token and adding it to Jenkins
   - Go back to the ```Jenkins > Manage Jenkins> Configuration > SonarQube Servers > Advanced > Server Authentication``` from the last part of Step #1 and click "Add"
   ![Manage>Configuration>SonarQube Servers>Advanced>Server Authentication](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.jpg)
 
-  - a select "Docker Host Certificate Authentication" from "Kind" and click "Add"  in "Client Key"
-  ![](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.Add.jpg)
+  - select "Docker Host Certificate Authentication" from "Kind" and click "Add"  in "Client Key"
+  ![Manage>Configuration>SonarQube Servers>Advanced>Server Authentication>Add](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.Add.jpg)
+
+Step #4 - Update your Jenkinsfile for your git project to include the apropriate SonarQube call.
+
+Example: within a proejct you need to add a Jenkinsfile to provide the settings to Jenkins new "Pipeline" system, here is a snippet from one
+
+```javascript
+stage('Sonarqube') {
+      environment {
+        scannerHome = tool 'SonarQubeScanner'
+      }
+      steps {
+        withSonarQubeEnv('sonarqube') {
+          sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 30, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+      }
+    }
+```
+
+Important things to note are "**SonarQubeScanner**" must match the settings in Global Configuration in Jenkins, as well as "**sonarqube**" as the name of the server. The rest should just work. Example Jenkinsfile is in the [support_files](./support_files/Jenkinsfile) as well as in the example project [DiceRoller](https://github.com/JENkt4k/DiceRoller) which uses a Android Docker container to build a Google example app.
