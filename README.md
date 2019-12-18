@@ -5,8 +5,8 @@ This is a reference project that hopes to provide easy examples of Docker Compos
 ## CI/CD with Jenkins and SonarQube
 
 Examples:
- - [docker_compose/jenkins_blueocean/docker-compose.yaml](./docker_compose/src/master/jenkins_blueorigin/jenkins_blueocean/docker-compose.yaml)
- - [docker_compose/sonarqube_postgre_sql/docker-compose.yaml](./docker_compose/src/master/jenkins_blueorigin/sonarqube_postgre_sql/docker-compose.yaml)
+ - [jenkins_blueocean/docker-compose.yaml](./jenkins_blueocean/docker-compose.yaml)
+ - [sonarqube_postgre_sql/docker-compose.yaml](./sonarqube_postgre_sql/docker-compose.yaml)
 
 *nsure you have already installed Docker, DockerCompose, and Git*
 
