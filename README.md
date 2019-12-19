@@ -73,6 +73,7 @@ Step #3 - Generating SonarQube token and adding it to Jenkins
 
   - select "Docker Host Certificate Authentication" from "Kind" and click "Add"  in "Client Key"
   ![Manage>Configuration>SonarQube Servers>Advanced>Server Authentication>Add](./docs/images/ManageJenkins.Configuration.SonarQube.Advanced.Add.jpg)
+  For more info on "tokens",  see [Sonar docs](https://docs.sonarqube.org/latest/user-guide/user-token/)
 
 Step #4 - Update your Jenkinsfile for your git project to include the apropriate SonarQube call.
 
