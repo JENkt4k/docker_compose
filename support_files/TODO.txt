@@ -1,0 +1,6 @@
+- Add Vaultmart for secrets
+- Add deployment steps for Jeknins examples
+- create generalized python script (currently module name is "binary" from mypytest example project https://github.com/JENkt4k/mypytest.git)
+- Add Selenium/Appium instrcutions for testing
+  - smoke
+  - integrations
